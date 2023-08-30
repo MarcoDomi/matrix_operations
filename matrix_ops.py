@@ -8,8 +8,8 @@ def matrix_addition(matrix1, matrix2) -> list:
         temp_row = []
         for col in range(col_num):
             element_sum = matrix1[row][col] + matrix2[row][col]
-            temp_row += [element_sum] #add
-        sum_mat += [temp_row]
+            temp_row += [element_sum] #use brackets so the sum gets included as an element in temp_row list
+        sum_mat += [temp_row] #use brackets so the temp_row list is included as an element in sum_mat
     return sum_mat
 
 
