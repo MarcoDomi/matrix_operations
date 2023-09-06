@@ -27,17 +27,51 @@ def matrix_transpose(matrix) -> list:
     
     return transposed_matrix
 
+#time complexity: O(n*m*j) 
+#n = num of rows in matrix1
+#m = num of col in matrix2
+#j = num of col in matrix1 OR num of rows in matrix2 represents number of multiplication and addition operations performed
+#          **matrix1 col and matrix2 rows are equal
+def matrix_multiplication(matrix1, matrix2) -> list:
+    '''multiply two matrices'''
+    #must be equal
+    matrix1_col = len(matrix1[0]) 
+    matrix2_row = len(matrix2)
+
+    #determins the dimensions of result matrix
+    matrix1_row = len(matrix1)
+    matrix2_col = len(matrix2[0])
+
+    assert matrix1_col == matrix2_row, "matrix 1 columns must equal matrix 2 rows"
+
+    new_matrix_dimension = matrix1_col
+    new_matrix = []
+
+    for row in range(matrix1_row):
+        temp_list = []
+        for col in range(matrix2_col):
+            sum = 0
+            for elem in range(new_matrix_dimension):
+                sum += matrix1[row][elem] * matrix2[elem][col] 
+            temp_list += [sum]
+        new_matrix += [temp_list]
+        
+        if matrix1_row == 1:
+            new_matrix = new_matrix[0]
+
+    #if matrix_1 is n X m and matrix_2 is m X 1 then new_matrix will be n X 1
+    return new_matrix
+
 
 def print_matrix(matrix) -> None:
     for row in matrix:
         print(row)
 
 
-mat1 = [[23,1,8],[40, 32, 67], [52, 15, 3]]
-mat2 = [[4,5,39],[12, 79, 17], [24, 19, 7]]
+mat1 = [[23,1],[4, 3]]
+mat2 = [[4,5,39],[12, 79, 17]]
 
 sum = matrix_addition(mat1, mat2)
 matrix_T = matrix_transpose(mat1)
-print_matrix(mat1)
-print()
-print_matrix(matrix_T)
+product_matrix = matrix_multiplication(mat1, mat2)
+print(product_matrix)
